@@ -18,6 +18,7 @@ on:
 
 # 4 设置权限（文件是可以被读写修改的）
 permissions:
+  id-token: write   # ⭐️ 加上这个解决 deploy-pages 报错
   contents: write
 
 # 工作1
@@ -32,12 +33,12 @@ jobs:
       # 1 将代码仓库的内容拉取（或称为检出）到工作目录中，以便在下面的工作流程中使用
       - name: Checkout code (检出代码)
         uses: actions/checkout@v3
-      # 2 安装 node 环境，并设置版本为 22
+      # 2 安装 node 环境，并设置版本为 22（跟本地项目node版本保持一致）
       - name: Setup Node.js (设置 node 版本)
         uses: actions/setup-node@v3
         with:
           node-version: 22
-      # 3 安装 pnpm
+      # 3 安装 pnpm，并设置版本（跟本地项目pnpm版本保持一致）
       - name: Install pnpm (安装 pnpm)
         uses: pnpm/action-setup@v2
         with:
